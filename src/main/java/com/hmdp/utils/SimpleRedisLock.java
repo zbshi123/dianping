@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+/***
+ * 简单的基于Redisd的setnx的分布式互斥锁，但是存在一些问题。比如重入问题、不可重试、
+ * 超时释放(代码逻辑还没有执行完，锁就被释放了)、主从集群一致问题。
+ */
 public class SimpleRedisLock implements ILock{
     private final String name;
     private final StringRedisTemplate stringRedisTemplate;
