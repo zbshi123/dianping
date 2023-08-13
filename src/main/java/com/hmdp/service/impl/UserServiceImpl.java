@@ -58,7 +58,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         // 4.保存验证码到redis
         // 以phone为key，code为value，设置两分钟的有效时间（存活在redis中的时间）
-        stringRedisTemplate.opsForValue().set(LOGIN_CODE_KEY + phone, code, 2, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(LOGIN_CODE_KEY + phone, code, LOGIN_CODE_TTL, TimeUnit.MINUTES);
 
         // 5.发送短信验证码（模拟）
         log.debug("发送短信验证码成功，验证码：{ " + code + " } 【模拟】");
